@@ -9,7 +9,7 @@ export const Header = styled.div`
   font-weight: bold;
   display: inline-block;
   width: 100%;
-  height: 80px;
+  height: 75px;
 `
 
 export const StyledTitle = styled.div`
@@ -19,6 +19,17 @@ export const StyledTitle = styled.div`
   text-align: right;
   padding-right: 30px;
   line-height: 4;
+`
+
+export const MenuContainer = styled.div`
+  display: flex;
+`
+
+export const FavouritesHeader = styled.div`
+  margin-left: auto;
+  margin-right: 50px;
+  float: right;
+  font-size: 10px;
 `
 
 export const LoginHeader = styled.div`

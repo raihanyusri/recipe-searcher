@@ -4,6 +4,8 @@ import { useRef, useState } from 'react'
 import { Header } from '../components/Navbar';
 import { StyledInput, StyledPassword, InputContainer, StyledButton, PromptTitle, Prompt } from '../components/Fields.js';
 import { Link } from 'react-router-dom';
+import FavouriteOutlineIcon from '@material-ui/icons/FavoriteBorderOutlined'; 
+import { FavouritesHeader } from '../components/Navbar';
 
 export default function Signup() {
     const [loading, setLoading] = useState(false);
@@ -45,7 +47,16 @@ export default function Signup() {
 
     return (
         <div>
-            <Header>CookWhat?</Header>
+            <Header>
+                <Link to="/home" style={{ textDecoration: 'none', color: 'white' }}>
+                    CookWhat?
+                </Link>
+                <FavouritesHeader>
+                    <Link to="/favourites" style={{ textDecoration: 'none', color: 'white'}}>
+                        <FavouriteOutlineIcon />
+                    </Link>
+                </FavouritesHeader>
+            </Header>
 
             <PromptTitle>{currentUser?.email ? currentUser.email : "Sign up as a user now!"}</PromptTitle>
             <InputContainer>

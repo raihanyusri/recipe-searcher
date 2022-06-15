@@ -5,6 +5,8 @@ import { Header } from '../components/Navbar';
 import { StyledInput, StyledPassword, InputContainer, StyledButton, PromptTitle, Prompt } from '../components/Fields.js';
 import { StyledTitle } from '../components/Navbar';
 import { Link, useNavigate } from 'react-router-dom';
+import FavouriteOutlineIcon from '@material-ui/icons/FavoriteBorderOutlined'; 
+import { FavouritesHeader } from '../components/Navbar';
 
 export default function Signup() {
     const [loading, setLoading] = useState(false);
@@ -39,7 +41,14 @@ export default function Signup() {
     return (
         <div>
             <Header>
-                CookWhat?
+                <Link to="/home" style={{ textDecoration: 'none', color: 'white' }}>
+                    CookWhat?
+                </Link>
+                <FavouritesHeader>
+                    <Link to="/favourites" style={{ textDecoration: 'none', color: 'white'}}>
+                        <FavouriteOutlineIcon />
+                    </Link>
+                </FavouritesHeader>
             </Header>
 
             <PromptTitle>{currentUser?.email ? "You are logged in as: " + currentUser.email : "Login!"}</PromptTitle>
