@@ -59,8 +59,8 @@ export default function Signup() {
                 <Prompt>Need an account? {!currentUser?.email ? <Link to="/signup">Sign Up!</Link> : ""}</Prompt>
             </InputContainer>
 
-            <button disabled={loading || currentUser} onClick={handleLogin}>Log In</button>
-            <button disabled={loading || !currentUser} onClick={handleLogout}>Logout</button>
+            {/* <button disabled={loading || currentUser} onClick={handleLogin}>Log In</button>
+            <button disabled={loading || !currentUser} onClick={handleLogout}>Logout</button> */}
         </div>
     )
 }
