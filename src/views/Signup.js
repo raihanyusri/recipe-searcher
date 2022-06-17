@@ -3,7 +3,7 @@ import { signUp, login, logOut, useAuth } from '../firebase.js'
 import { useRef, useState } from 'react'
 import { Header } from '../components/Navbar';
 import { StyledInput, StyledPassword, InputContainer, StyledButton, PromptTitle, Prompt } from '../components/Fields.js';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import FavouriteOutlineIcon from '@material-ui/icons/FavoriteBorderOutlined'; 
 import { FavouritesHeader } from '../components/Navbar';
 
