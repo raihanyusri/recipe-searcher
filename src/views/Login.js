@@ -1,9 +1,8 @@
 import React from 'react'
-import { signUp, login, logOut, useAuth } from '../firebase.js'
+import { login, useAuth } from '../firebase.js'
 import { useRef, useState } from 'react'
 import { Header } from '../components/Navbar';
 import { StyledInput, StyledPassword, InputContainer, StyledButton, PromptTitle, Prompt } from '../components/Fields.js';
-import { StyledTitle } from '../components/Navbar';
 import { Link, useNavigate } from 'react-router-dom';
 import FavouriteOutlineIcon from '@material-ui/icons/FavoriteBorderOutlined'; 
 import { FavouritesHeader } from '../components/Navbar';
@@ -21,17 +20,6 @@ export default function Signup() {
         try {
             await login(emailRef.current.value, passwordRef.current.value);
             navigate("/", { replace: true });
-        } catch {
-            alert("Error!");
-        }
-        setLoading(false);
-    }
-
-    async function handleLogout() {
-        setLoading(true);
-        try {
-            await logOut();
-            passwordRef.current.value = "";
         } catch {
             alert("Error!");
         }

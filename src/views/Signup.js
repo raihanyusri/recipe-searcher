@@ -1,5 +1,5 @@
 import React from 'react'
-import { signUp, login, logOut, useAuth } from '../firebase.js'
+import { signUp, useAuth } from '../firebase.js'
 import { useRef, useState } from 'react'
 import { Header } from '../components/Navbar';
 import { StyledInput, StyledPassword, InputContainer, StyledButton, PromptTitle, Prompt } from '../components/Fields.js';
@@ -10,6 +10,7 @@ import { FavouritesHeader } from '../components/Navbar';
 export default function Signup() {
     const [loading, setLoading] = useState(false);
     const currentUser = useAuth();
+    let navigate = useNavigate();
 
     const emailRef = useRef();
     const passwordRef = useRef();
@@ -19,27 +20,6 @@ export default function Signup() {
         try {
             await signUp(emailRef.current.value, passwordRef.current.value);
             navigate("/", { replace: true });
-        } catch {
-            alert("Error!");
-        }
-        setLoading(false);
-    }
-
-    async function handleLogin() {
-        setLoading(true);
-        try {
-            await login(emailRef.current.value, passwordRef.current.value);
-        } catch {
-            alert("Error!");
-        }
-        setLoading(false);
-    }
-
-    async function handleLogout() {
-        setLoading(true);
-        try {
-            await logOut();
-            passwordRef.current.value = "";
         } catch {
             alert("Error!");
         }
