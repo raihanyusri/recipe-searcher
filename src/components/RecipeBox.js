@@ -23,6 +23,7 @@ export const RecipeBody = styled.div`
 `
 
 export const RecipeImage = styled.img`
+  padding: 10px;
   height: 300px;
   object-fit: cover;
   border-radius: 4px;
@@ -69,9 +70,4 @@ export const RecipeHealthLabels = styled.div`
 export const Spacing = styled.span`
   position: relative;
   left: 5px;
-`
-
-export const RecipeIngredients = styled.div`
-  font-size: 13px;
-  font-style: italic;
 `

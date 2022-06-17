@@ -6,13 +6,13 @@ import FavouriteFilledIcon from '@material-ui/icons/FavoriteOutlined';
 import axios from 'axios';
 import { Header, StyledTitle, MenuContainer, FavouritesHeader } from '../components/Navbar';
 import { SearchBar, SearchInput } from '../components/SearchBar';
-import { Spacing, TickList, RecipeListContainer, RecipeContainer, RecipeBody, RecipeImage, RecipeTitle, RecipeNutritionContainer, RecipeMiniHeader, RecipeDietLabels, RecipeIngredients, RecipeHealthLabels, ViewFullRecipeLink } from '../components/RecipeBox';
+import { Spacing, TickList, RecipeListContainer, RecipeContainer, RecipeBody, RecipeImage, RecipeTitle, RecipeNutritionContainer, RecipeMiniHeader, RecipeDietLabels, RecipeHealthLabels, ViewFullRecipeLink } from '../components/RecipeBox';
 import { useState, useEffect } from 'react';
 import { IconButton } from '@material-ui/core';
 import { logOut, useAuth, db } from '../firebase.js'
-import { StyledButton } from '../components/Fields';
+import { PromptTitle, StyledButton } from '../components/Fields';
 import { Link } from 'react-router-dom';
-import { collection, addDoc, onSnapshot, deleteDoc } from '@firebase/firestore';
+import { collection, addDoc, onSnapshot } from '@firebase/firestore';
 
 const APP_ID = "7fa7fd18";
 const APP_KEY = "ddde9a126cf34301389593363e8315aa";
@@ -44,19 +44,12 @@ export const RecipeComponent = (props) => {
     await addDoc(collection(db,"users", user.email, "likes"), {recipeObject});
   }
 
-  // const removeFromFavourites = async(recipeObject) => {
-  //   setClicked(false);
-  //   db.collection
-  //   await deleteDoc(collection(db,"users", user.email, "likes"), {recipeObject});
-  // }
-
   useEffect(
     () =>
     onSnapshot(collection(db, "users", user.email, "likes"), (snapshot) => {
       setRecipeFavs(snapshot.docs.map(doc => doc.data().recipeObject.recipeItem.recipe.label));
-      if (recipeFavs.indexOf(recipeItem.recipe.label) != -1) {
+      if (recipeFavs.indexOf(recipeItem.recipe.label) !== -1) {
         setInFavourites(true);
-        console.log('heyy');
       }
     })
   );
@@ -68,9 +61,6 @@ export const RecipeComponent = (props) => {
       <RecipeBody>
         <RecipeImage src={recipeItem.recipe.image} />
         <RecipeNutritionContainer>
-          <RecipeMiniHeader>Ingredients</RecipeMiniHeader>
-          <RecipeIngredients>{recipeItem.recipe.ingredientLines.length ? 
-            recipeItem.recipe.ingredientLines.map((ingredient) => <li>{ingredient}</li>) : <br></br>}</RecipeIngredients>
           <RecipeDietLabels>{recipeItem.recipe.dietLabels.length ? 
             recipeItem.recipe.dietLabels.map((label) => <TickList><Spacing>{label}</Spacing></TickList>) : <span></span>}</RecipeDietLabels>
           <RecipeHealthLabels>{recipeItem.recipe.healthLabels.length ? 
@@ -148,6 +138,7 @@ function App() {
           </Link>
           </StyledTitle>}
       </Header>
+      <PromptTitle>Search for an ingredient!</PromptTitle>
       <SearchBar>
         <SearchIcon />
         <SearchInput placeholder="Search ingredient" onChange={onTextChange}/>
