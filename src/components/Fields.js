@@ -105,3 +105,11 @@ export const StyledButton = styled.button`
     color: rgba(0, 0, 0, .3);
   }
 `
+
+export const AccessDenied = styled.div`
+  font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: red;
+  font-size: 15px;
+  margin: 10px 0;
+  text-align: center;
+`

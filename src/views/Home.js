@@ -11,7 +11,7 @@ import { useState, useEffect } from 'react';
 import { IconButton } from '@material-ui/core';
 import { logOut, useAuth, db } from '../firebase.js'
 import { PromptTitle, StyledButton } from '../components/Fields';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { collection, addDoc, onSnapshot } from '@firebase/firestore';
 
 const APP_ID = "7fa7fd18";
@@ -38,22 +38,28 @@ export const RecipeComponent = (props) => {
   const [inFavourites, setInFavourites] = useState(false);
   const { recipeItem, user, favourited } = props;
   const classes = useClasses();
+  const emailString = user?.email;
+  let navigate = useNavigate();
 
   const addToFavourites = async(recipeObject) => {
-    setClicked(true);
-    await addDoc(collection(db,"users", user.email, "likes"), {recipeObject});
+    if (user) {
+      setClicked(true);
+      await addDoc(collection(db,"users", user.email, "likes"), {recipeObject});
+    }
+    else {
+      navigate("/login");
+    }
   }
 
   useEffect(
     () =>
-    onSnapshot(collection(db, "users", user.email, "likes"), (snapshot) => {
+    onSnapshot(collection(db, "users", (emailString ? emailString : "testing@gmail.com"), "likes"), (snapshot) => {
       setRecipeFavs(snapshot.docs.map(doc => doc.data().recipeObject.recipeItem.recipe.label));
       if (recipeFavs.indexOf(recipeItem.recipe.label) !== -1) {
         setInFavourites(true);
       }
     })
   );
-
 
   return (
     <RecipeContainer>
@@ -93,6 +99,11 @@ function App() {
       `https://api.edamam.com/search?q=${searchInput}&app_id=${APP_ID}&app_key=${APP_KEY}`
     )
     setRecipeList(response.data.hits);
+    // if (currentUser) {
+    //   setRecipeList(response.data.hits);
+    // } else {
+    //   return <div>hi</div>
+    // }
   }
 
   const onTextChange = (event) => {

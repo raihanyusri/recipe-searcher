@@ -2,17 +2,15 @@ import React from 'react';
 import { Header, StyledTitle } from '../components/Navbar';
 import { StyledButton } from '../components/Fields';
 import { useState } from 'react';
-import { db, useAuth, logOut } from '../firebase';
+import { db, logOut } from '../firebase';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc, onSnapshot, collection } from '@firebase/firestore';
-import { useEffect } from 'react';
+import { onSnapshot, collection } from '@firebase/firestore';
 import { Link } from 'react-router-dom';
 import { RecipeComponent } from './Home';
-import { RecipeListContainer, RecipeImage } from '../components/RecipeBox';
+import { RecipeListContainer } from '../components/RecipeBox';
 import FavouriteOutlineIcon from '@material-ui/icons/FavoriteBorderOutlined'; 
-import FavouriteFilledIcon from '@material-ui/icons/FavoriteOutlined'; 
 import { FavouritesHeader } from '../components/Navbar';
-import { PromptTitle } from '../components/Fields.js'
+import { PromptTitle, AccessDenied } from '../components/Fields.js'
 
 function Favourites() {
     const [loading, setLoading] = useState(false);
@@ -27,10 +25,7 @@ function Favourites() {
         onSnapshot(collection(db, "users", user.email, "likes"), (snapshot) => {
             setRecipeList(snapshot.docs.map(doc => doc.data()));
         });
-    } else {
-        // User is signed out
-        // ...
-    }
+    } 
     });
 
 
@@ -69,7 +64,7 @@ function Favourites() {
                 </Link>
                 </StyledTitle>}
             </Header>
-                <PromptTitle>Your Favourites</PromptTitle>
+            {currentUser?.email ? <PromptTitle>Your Favourites</PromptTitle> : <AccessDenied>You need to be logged in to view this page!</AccessDenied>}
             <RecipeListContainer>
                 {recipeList?.length ? recipeList.map((obj) => (<RecipeComponent recipeItem={obj.recipeObject.recipeItem} user={currentUser} favourited={true}/>)) : <span></span>}
             </RecipeListContainer>
