@@ -1,6 +1,6 @@
 import React from 'react';
 import { Header, StyledTitle } from '../components/Navbar';
-import { StyledButton } from '../components/Fields';
+import { StyledButton, LogoPage } from '../components/Fields';
 import { useState } from 'react';
 import { db, logOut } from '../firebase';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -8,9 +8,24 @@ import { onSnapshot, collection } from '@firebase/firestore';
 import { Link } from 'react-router-dom';
 import { RecipeComponent } from './Home';
 import { RecipeListContainer } from '../components/RecipeBox';
-import FavouriteOutlineIcon from '@material-ui/icons/FavoriteBorderOutlined'; 
-import { FavouritesHeader } from '../components/Navbar';
+import { FavouritesHeader, MenuBarContainer, MenuContainer, LogoContainer, StyledWelcome } from '../components/Navbar';
 import { PromptTitle, AccessDenied } from '../components/Fields.js'
+import logo from '../img/logo2.png';
+import bg from '../img/4901718.jpg'
+
+const styles = {
+    paperContainer: {
+      backgroundImage: 'linear-gradient(rgba(240, 240, 240, 0.9), rgba(240, 240, 240, 0.9)), url(' + bg + ')',
+      height: '100%',
+      width: '100%',
+      minHeight: '100vh',
+      backgroundRepeat: 'no-repeat',
+      backgroundAttachment: 'fixed',
+      backgroundSize: 'cover',
+      overflowX: 'none',
+      overflowY: 'none'
+    }
+}
 
 function Favourites() {
     const [loading, setLoading] = useState(false);
@@ -40,29 +55,38 @@ function Favourites() {
       }
 
     return (
-        <div>
+        <div style={styles.paperContainer}>
             <Header>
-                <Link to="/home" style={{ textDecoration: 'none', color: 'white' }}>
-                    CookWhat?
-                </Link>
-                <FavouritesHeader>
-                    <Link to="/favourites" style={{ textDecoration: 'none', color: 'white'}}>
-                        <FavouriteOutlineIcon />
+                <MenuContainer>
+                <LogoContainer>
+                    <Link to="/home" style={{ textDecoration: 'none', color: 'white'}}>
+                    <LogoPage src={logo} />
                     </Link>
-                </FavouritesHeader>
-                {currentUser?.email ? 
-                <StyledTitle>
-                    Logged in as: {currentUser.email}
+                </LogoContainer>
+                { currentUser?.email ?
+                    <StyledWelcome>
+                    Hello, {currentUser.email}!
+                    </StyledWelcome> : <span></span>
+                }
+                <MenuBarContainer>
+                    {currentUser?.email ? 
+                    <FavouritesHeader>
+                    <Link to="/favourites" style={{ textDecoration: 'none'}}>
+                        <StyledTitle style={{ marginTop: '20px' }}>Favourites</StyledTitle>
+                    </Link>
+                    </FavouritesHeader> : <div></div>}
+                    {currentUser?.email ? 
                     <StyledButton disabled={loading || !currentUser} onClick={handleLogout}>Logout</StyledButton>
-                </StyledTitle>
-                : <StyledTitle>
-                <Link to="/signup">
+                    : <StyledTitle>
+                    <Link to="/signup">
                     <StyledButton>Sign Up</StyledButton>
-                </Link>
-                <Link to="/login">
+                    </Link>
+                    <Link to="/login">
                     <StyledButton>Login</StyledButton>
-                </Link>
-                </StyledTitle>}
+                    </Link>
+                    </StyledTitle>}
+                </MenuBarContainer>
+                </MenuContainer>
             </Header>
             {currentUser?.email ? <PromptTitle>Your Favourites</PromptTitle> : <AccessDenied>You need to be logged in to view this page!</AccessDenied>}
             <RecipeListContainer>

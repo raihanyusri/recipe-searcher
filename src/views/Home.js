@@ -4,15 +4,17 @@ import SearchIcon from '@material-ui/icons/Search';
 import FavouriteOutlineIcon from '@material-ui/icons/FavoriteBorderOutlined'; 
 import FavouriteFilledIcon from '@material-ui/icons/FavoriteOutlined'; 
 import axios from 'axios';
-import { Header, StyledTitle, MenuContainer, FavouritesHeader } from '../components/Navbar';
+import { Header, StyledTitle, MenuContainer, FavouritesHeader, LogoContainer, MenuBarContainer, StyledWelcome } from '../components/Navbar';
 import { SearchBar, SearchInput } from '../components/SearchBar';
 import { Spacing, TickList, RecipeListContainer, RecipeContainer, RecipeBody, RecipeImage, RecipeTitle, RecipeNutritionContainer, RecipeMiniHeader, RecipeDietLabels, RecipeHealthLabels, ViewFullRecipeLink } from '../components/RecipeBox';
 import { useState, useEffect } from 'react';
-import { IconButton } from '@material-ui/core';
+import { IconButton, StylesProvider } from '@material-ui/core';
 import { logOut, useAuth, db } from '../firebase.js'
-import { PromptTitle, StyledButton } from '../components/Fields';
+import { PromptTitle, StyledButton, LogoPage } from '../components/Fields';
 import { Link, useNavigate } from 'react-router-dom';
 import { collection, addDoc, onSnapshot } from '@firebase/firestore';
+import bg from '../img/4901718.jpg'
+import logo from '../img/logo2.png';
 
 const APP_ID = "7fa7fd18";
 const APP_KEY = "ddde9a126cf34301389593363e8315aa";
@@ -30,6 +32,20 @@ const useClasses = makeStyles(theme => ({
     }
   }
 }))
+
+const styles = {
+  paperContainer: {
+    backgroundImage: 'linear-gradient(rgba(240, 240, 240, 0.9), rgba(240, 240, 240, 0.9)), url(' + bg + ')',
+    height: '100%',
+    width: '100%',
+    minHeight: '100vh',
+    backgroundRepeat: 'no-repeat',
+    backgroundAttachment: 'fixed',
+    backgroundSize: 'cover',
+    overflowX: 'none',
+    overflowY: 'none'
+  }
+}
 
 
 export const RecipeComponent = (props) => {
@@ -123,39 +139,49 @@ function App() {
   }
 
   return (
-    <Container>
+    <Container style={styles.paperContainer}>
       <Header>
         <MenuContainer>
-          <Link to="/home" style={{ textDecoration: 'none', color: 'white'}}>
-            CookWhat?
-          </Link>
-          <FavouritesHeader>
-            <Link to="/favourites" style={{ textDecoration: 'none', color: 'white'}}>
-                <FavouriteOutlineIcon />
+          <LogoContainer>
+            <Link to="/home" style={{ textDecoration: 'none', color: 'white'}}>
+              <LogoPage src={logo} />
             </Link>
-          </FavouritesHeader>
-        </MenuContainer>
-        {currentUser?.email ? 
-          <StyledTitle>
-            Logged in as: {currentUser.email}
+          </LogoContainer>
+          { currentUser?.email ?
+            <StyledWelcome>
+              Hello, {currentUser.email}!
+            </StyledWelcome> : <span></span>
+          }
+          <MenuBarContainer>
+            {currentUser?.email ? 
+            <FavouritesHeader>
+              <Link to="/favourites" style={{ textDecoration: 'none'}}>
+                  <StyledTitle style={{ marginTop: '20px' }}>Favourites</StyledTitle>
+              </Link>
+            </FavouritesHeader> : <div></div>}
+            {currentUser?.email ? 
             <StyledButton disabled={loading || !currentUser} onClick={handleLogout}>Logout</StyledButton>
-          </StyledTitle>
-          : <StyledTitle>
-          <Link to="/signup">
-            <StyledButton>Sign Up</StyledButton>
-          </Link>
-          <Link to="/login">
-            <StyledButton>Login</StyledButton>
-          </Link>
-          </StyledTitle>}
+            : <StyledTitle>
+            <Link to="/signup">
+              <StyledButton>Sign Up</StyledButton>
+            </Link>
+            <Link to="/login">
+              <StyledButton>Login</StyledButton>
+            </Link>
+            </StyledTitle>}
+          </MenuBarContainer>
+        </MenuContainer>
       </Header>
-      <PromptTitle>Search for an ingredient!</PromptTitle>
-      <SearchBar>
-        <SearchIcon />
-        <SearchInput placeholder="Search ingredient" onChange={onTextChange}/>
-      </SearchBar>
+      
+      <div style={{ margin: 'auto'}}>
+        <PromptTitle>Search for an ingredient!</PromptTitle>
+        <SearchBar>
+          <SearchIcon />
+          <SearchInput placeholder="Search ingredient" onChange={onTextChange}/>
+        </SearchBar>
+      </div>
       <RecipeListContainer>
-        {recipeList?.length ? recipeList.map((recipe) => (<RecipeComponent recipeItem={recipe} user={currentUser} />)) : <span></span>}
+        {recipeList?.length ? recipeList.map((recipe) => (<RecipeComponent recipeItem={recipe} user={currentUser} />)) : <span style={{ height: '100%'}}></span>}
       </RecipeListContainer>
     </Container>
   );

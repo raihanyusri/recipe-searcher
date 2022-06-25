@@ -2,11 +2,12 @@ import styled from 'styled-components'
 
 export const SearchBar = styled.div`
   display: flex;
-  background-color: #e8faef;
+  background-color: #ffd07a;
   padding: 12px;
   margin: auto;
-  width: 50%;
-  border-radius: 8px;
+  width: 500px;
+  min-width: 300px;
+  border-radius: 25px;
 `
 
 export const SearchInput = styled.input`
@@ -14,7 +15,9 @@ export const SearchInput = styled.input`
   border: none;
   outline: none;
   margin-left: 2%;
-  width: 90%;
+  width: 85%;
   font-size: 15px;
-  border-radius: 2px;
+  border-radius: 10px;
+  padding: 6px;
+  padding-left: 12px;
 `

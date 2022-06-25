@@ -13,9 +13,11 @@ export const RecipeContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 10px;
-  width: 700px;
+  width: 500px;
   border-radius: 8px;
-  box-shadow: 0 3px 10px 0 #aaa;
+  box-shadow: 0 5px 25px 0 #aaa;
+  background-color: white;
+  min-width: 20px;
 `
 export const RecipeBody = styled.div`
   display: flex;
@@ -24,7 +26,7 @@ export const RecipeBody = styled.div`
 
 export const RecipeImage = styled.img`
   padding: 10px;
-  height: 300px;
+  height: 225px;
   object-fit: cover;
   border-radius: 4px;
 `

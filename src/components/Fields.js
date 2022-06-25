@@ -2,7 +2,8 @@ import styled from 'styled-components'
 
 export const PromptTitle = styled.h2`
     font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
-    margin: 10px 0;
+    margin: auto;
+    padding: 10px;
     text-align: center;
 `
 
@@ -10,17 +11,18 @@ export const Prompt = styled.div`
     font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
     font-size: 13px;
     text-align: center;
+    margin: 5px;
 `
 
 export const StyledInput = styled.input.attrs({ type: 'text' })`
     font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
     padding: 5px;
-    margin: 5px;
+    margin: 10px;
     flex: 1 0;
     min-width: 224px;
     min-height: 22px;
     font-size: 15px;
-    width: 30%;
+    width: 55%;
     background-color: transparent;
     padding-left: 10px;
     border: 1px solid grey;
@@ -37,7 +39,7 @@ export const StyledPassword = styled.input.attrs({ type: 'password' })`
     min-width: 224px;
     min-height: 22px;
     font-size: 15px;
-    width: 30%;
+    width: 55%;
     background-color: transparent;
     padding-left: 10px;
     border: 1px solid grey;
@@ -56,9 +58,9 @@ export const InputContainer = styled.div`
 
 export const StyledButton = styled.button`
     float: right;
-    margin: 5px;
+    margin: 15px;
     align-items: center;
-    background-color: #0ac23e;
+    background-color: #ffaa4a;
     border: 0;
     border-radius: 80px;
     box-sizing: border-box;
@@ -85,17 +87,17 @@ export const StyledButton = styled.button`
     vertical-align: middle;
 
   &:hover {
-    background-color: #07942f;
+    background-color: #ab5b00;
     color: #ffffff;
   }
 
   &:focus {
-    background-color: #07942f;
+    background-color: #ab5b00;
     color: #ffffff;
   }
 
   &:active {
-    background: #02300f;
+    background: #302102;
     color: rgb(255, 255, 255, .7);
   }
 
@@ -112,4 +114,53 @@ export const AccessDenied = styled.div`
   font-size: 15px;
   margin: 10px 0;
   text-align: center;
+`
+
+export const LoginContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 30%;
+  height: 45%;
+  border-radius: 18px;
+  margin: auto; 
+  min-width: 300px;
+  min-height: 22px;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #f5f5f5;
+`
+export const SignUpContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 30%;
+  height: 50%;
+  border-radius: 18px;
+  margin: auto; 
+  min-width: 300px;
+  min-height: 22px;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #f5f5f5;
+`
+
+export const LogoImage = styled.img`
+  width: 75%;
+  height: auto;
+  margin: auto;
+  padding-bottom: 5px;
+`
+
+export const LogoPage = styled.img`
+  width: 250px;
+  height: auto;
+  margin: auto;
+  padding-left: 13px;
 `
