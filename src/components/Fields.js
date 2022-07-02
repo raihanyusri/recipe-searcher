@@ -17,7 +17,7 @@ export const Prompt = styled.div`
 export const StyledInput = styled.input.attrs({ type: 'text' })`
     font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
     padding: 5px;
-    margin: 10px;
+    margin: 5px;
     flex: 1 0;
     min-width: 224px;
     min-height: 22px;
@@ -125,7 +125,7 @@ export const LoginContainer = styled.div`
   border-radius: 18px;
   margin: auto; 
   min-width: 300px;
-  min-height: 22px;
+  min-height: 400px;
   position: absolute;
   top:0;
   bottom: 0;
@@ -142,7 +142,7 @@ export const SignUpContainer = styled.div`
   border-radius: 18px;
   margin: auto; 
   min-width: 300px;
-  min-height: 22px;
+  min-height: 450px;
   position: absolute;
   top:0;
   bottom: 0;
