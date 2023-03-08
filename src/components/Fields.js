@@ -138,7 +138,7 @@ export const SignUpContainer = styled.div`
   flex-direction: column;
   padding: 10px;
   width: 30%;
-  height: 50%;
+  height: 60%;
   border-radius: 18px;
   margin: auto; 
   min-width: 300px;
@@ -163,4 +163,10 @@ export const LogoPage = styled.img`
   height: auto;
   margin: auto;
   padding-left: 13px;
+  @media (max-width: 768px) {
+    width: 190px;
+    height: auto;
+    margin: auto;
+    padding-left: 3px;
+  }
 `

@@ -7,6 +7,10 @@ export const SearchBar = styled.div`
   margin: auto;
   width: 500px;
   border-radius: 25px;
+  
+  @media (max-width: 1024px) {
+    width: 350px;
+  }
 `
 
 export const SearchInput = styled.input`

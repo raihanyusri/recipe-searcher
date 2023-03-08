@@ -40,7 +40,9 @@ export default function Signup() {
                 </FavouritesHeader>
             </Header> */}
             <LoginContainer>
-                <LogoImage src={logo} />
+                <Link to="/home" style={{ textDecoration: 'none', color: 'white'}}>
+                    <LogoImage src={logo} style={{ display: 'block', marginLeft: 'auto', marginRight: 'auto' }}/>
+                </Link>
 
                 <PromptTitle>{currentUser?.email ? "You are logged in as: " + currentUser.email : "Login"}</PromptTitle>
                 <InputContainer>

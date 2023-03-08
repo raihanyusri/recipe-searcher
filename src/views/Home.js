@@ -6,8 +6,9 @@ import FavouriteFilledIcon from '@material-ui/icons/FavoriteOutlined';
 import axios from 'axios';
 import { Header, StyledTitle, MenuContainer, FavouritesHeader, LogoContainer, MenuBarContainer, StyledWelcome } from '../components/Navbar';
 import { SearchBar, SearchInput } from '../components/SearchBar';
+import { FeaturedBox } from '../components/FeaturedRecipe';
 import { Spacing, TickList, RecipeListContainer, RecipeContainer, RecipeBody, RecipeImage, RecipeTitle, RecipeNutritionContainer, RecipeMiniHeader, RecipeDietLabels, RecipeHealthLabels, ViewFullRecipeLink } from '../components/RecipeBox';
-import { useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { IconButton, StylesProvider } from '@material-ui/core';
 import { logOut, useAuth, db } from '../firebase.js'
 import { PromptTitle, StyledButton, LogoPage } from '../components/Fields';
@@ -115,11 +116,6 @@ function App() {
       `https://api.edamam.com/search?q=${searchInput}&app_id=${APP_ID}&app_key=${APP_KEY}`
     )
     setRecipeList(response.data.hits);
-    // if (currentUser) {
-    //   setRecipeList(response.data.hits);
-    // } else {
-    //   return <div>hi</div>
-    // }
   }
 
   const onTextChange = (event) => {
@@ -149,7 +145,7 @@ function App() {
           </LogoContainer>
           { currentUser?.email ?
             <StyledWelcome>
-              Hello, {currentUser.email}!
+              Hello, {currentUser.displayName ? currentUser.displayName : currentUser.email.substring(0, currentUser.email.indexOf("@")) }!
             </StyledWelcome> : <span></span>
           }
           <MenuBarContainer>
@@ -172,7 +168,7 @@ function App() {
           </MenuBarContainer>
         </MenuContainer>
       </Header>
-      
+
       <div style={{ margin: 'auto'}}>
         <PromptTitle>Search for an ingredient!</PromptTitle>
         <SearchBar>
@@ -181,7 +177,11 @@ function App() {
         </SearchBar>
       </div>
       <RecipeListContainer>
-        {recipeList?.length ? recipeList.map((recipe) => (<RecipeComponent recipeItem={recipe} user={currentUser} />)) : <span style={{ height: '100%'}}></span>}
+        {recipeList?.length ? 
+        recipeList.map((recipe) => 
+          (<RecipeComponent recipeItem={recipe} user={currentUser} />)) 
+          : <span style={{ height: '100%'}}>
+        </span>}
       </RecipeListContainer>
     </Container>
   );

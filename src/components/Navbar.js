@@ -36,6 +36,10 @@ export const StyledWelcome = styled.div`
   padding-right: 30px;
   line-height: 2;
   color: #ab5b00;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
 `
 
 export const MenuContainer = styled.div`
@@ -51,5 +55,5 @@ export const LogoContainer = styled.div`
 
 export const MenuBarContainer = styled.div`
   float: right;
-  display: flex;s
+  display: flex;
 `

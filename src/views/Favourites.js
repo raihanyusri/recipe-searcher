@@ -65,7 +65,7 @@ function Favourites() {
                 </LogoContainer>
                 { currentUser?.email ?
                     <StyledWelcome>
-                    Hello, {currentUser.email}!
+                    Hello, {currentUser.displayName ? currentUser.displayName : currentUser.email.substring(0, currentUser.email.indexOf("@")) }!
                     </StyledWelcome> : <span></span>
                 }
                 <MenuBarContainer>

@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useState, useEffect } from 'react'; 
 import 'firebase/firestore';
 import { getFirestore } from 'firebase/firestore';
@@ -16,8 +16,18 @@ const config = {
 const app = initializeApp(config);
 const auth = getAuth(app);
 
-export function signUp(email, password) {
+export function signUp(email, password, firstName, lastName) {
     return createUserWithEmailAndPassword(auth, email, password);
+}
+
+export function setDisplayName(firstName, lastName) {
+    updateProfile(auth.currentUser, {
+        displayName: (firstName + " " + lastName)
+    }).then(() => {
+        console.log("profile updated!");
+    }).catch((error) => {
+        console.log(error);
+    })
 }
 
 export function login(email, password) {
